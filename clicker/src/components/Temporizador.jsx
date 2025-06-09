@@ -1,43 +1,15 @@
-// CONTADOR DE TIEMPO
-const [intervalId, setIntervalId] = useState(0);
-const [mainMiliseconds, setMainMiliseconds] = useState(0);
-const playTimer = () => { 
+//Timer
+import { useEffect } from "react";
 
-  if(intervalId) {
-    clearInterval(intervalId);
-    setIntervalId(0);
-  }
-  
-  const newIntervalId = setInterval( () =>{
-    setMainMiliseconds( mainMiliseconds => mainMiliseconds + 1000 )
-  }, 1000)
-  
-  setIntervalId(newIntervalId);
+export default function Timer({ timeLeft, setTimeLeft, onFinish }) {
+    useEffect(() => {
+        if (timeLeft <= 0) {
+            onFinish();
+            return;
+        }
+        const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
+        return () => clearTimeout(timer);
+    }, [timeLeft, setTimeLeft, onFinish]);
+
+    return <div>Tiempo restante: {timeLeft}s</div>;
 }
-
-const resetTimer = () =>{
-  setMainMiliseconds(0)
-  if(intervalId) {
-    clearInterval(intervalId);
-    setIntervalId(0);
-  }
-}
-
-return (
-  <div className="container middle">
-    { 
-      stateGame === 0 ?
-      <MainScreen 
-        setStart={changeStateGame} 
-        level={level} 
-        changeDifficulty={changeDifficulty} 
-      /> : stateGame === 1 ?
-      <GameScreen 
-        numCards={cardsByLevel[level]} 
-        setRestart = {restartGame}
-        setFinish={changeStateGame} 
-        time={mainMiliseconds}
-      /> : <FinishScreen setRestart={restartGame} />
-    }
-  </div>
-);
