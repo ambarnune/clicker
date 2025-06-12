@@ -1,20 +1,30 @@
 //ResultsTable
-import Button from "./Button";
 
-const ResultsTabla = ({ results, onRetry, onBack }) => (
-    <div>
-        <h3>Resultados</h3>
-        <ul>
-            {results.map((res, idx) => (
-                <li key={idx}>
-                    {res.nivel}: {res.clicks} clicks
-                </li>
-            ))}
-        </ul>
-        <Button title="Reintentar" action={onRetry} />
-        <Button title="Volver a inicio" action={onBack} />
-    </div>
-);
+export default function Tabla({ results, onRetry, onBack }) {
+    return (
+        <div>
+            <h2>Resultados</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nivel</th>
+                        <th>Clicks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {results.map((result, idx) => (
+                        <tr key={idx}>
+                            <td>{result.level}</td>
+                            <td>{result.clicks}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+            <button onClick={onRetry}>Reintentar</button>
+            <button onClick={onBack}>Volver al inicio</button>
+        </div>
+    );
+}
 
 //import { useEffect, useState } from "react";
 
@@ -59,4 +69,4 @@ const ResultsTabla = ({ results, onRetry, onBack }) => (
 //);
 //}
 
-export default ResultsTabla;
+//export default ResultsTabla;

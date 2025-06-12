@@ -7,7 +7,8 @@ export default function Timer({ timeLeft, setTimeLeft, onFinish }) {
             onFinish();
             return;
         }
-        const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
+        //const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
+        const timer = setTimeout(() => setTimeLeft((prev) => prev - 1), 1000);
         return () => clearTimeout(timer);
     }, [timeLeft, setTimeLeft, onFinish]);
 
