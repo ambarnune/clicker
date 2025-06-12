@@ -1,2 +1,2 @@
 # juego usando react
-intentando hacer un clicker para la facultad
+intentando hacer un clicker
