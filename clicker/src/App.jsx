@@ -68,10 +68,10 @@ export default function App() {
                 <>
                     {/* Componente para elegir el nivel */}
                     <LevelSelector levels={LEVELS} selectedLevel={selectedLevel} onSelectLevel={setSelectedLevel} />
-                    {/* Botón para comenzar la partida solo si hay un nivel seleccionado */}
-                    {selectedLevel && <Button title="Comenzar" action={startGame} />}
                 </>
             )}
+            {/* Botón para comenzar la partida solo si hay un nivel seleccionado y pantalla de selección de nivel */}
+            {screen === "level" && selectedLevel && <Button title="Comenzar" action={startGame} />}
 
             {/* Pantalla de juego */}
             {screen === "game" && (
