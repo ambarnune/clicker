@@ -71,7 +71,8 @@ export default function App() {
                 </>
             )}
             {/* Botón para comenzar la partida solo si hay un nivel seleccionado y pantalla de selección de nivel */}
-            {screen === "level" && selectedLevel && <Button title="Comenzar" action={startGame} />}
+            {/* Pantalla de inicio con el botón "Comenzar" */}
+            {screen === "start" && selectedLevel && <Button title="Comenzar" action={startGame} />}
 
             {/* Pantalla de juego */}
             {screen === "game" && (
