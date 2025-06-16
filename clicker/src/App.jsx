@@ -80,6 +80,7 @@ export default function App() {
 
     // Renderizado condicional de componentes según pantalla
     return (
+        <div>
             <div className="app">
                 {/* Pantalla de selección de nivel */}
                 {screen === "level" && (
