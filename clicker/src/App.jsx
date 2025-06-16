@@ -80,17 +80,6 @@ export default function App() {
 
     // Renderizado condicional de componentes según pantalla
     return (
-        <div
-            style={{
-                height: "100vh", // Ocupa todo el alto visible
-                width: "100vw", // Ocupa todo el ancho visible
-                overflow: "hidden", // Oculta cualquier desborde
-                backgroundImage: `url(${process.env.PUBLIC_URL}/images/PixelArt.gif)`,
-                backgroundSize: "cover",
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "center",
-            }}
-        >
             <div className="app">
                 {/* Pantalla de selección de nivel */}
                 {screen === "level" && (
