@@ -1,0 +1,52 @@
+/* fuente: https://developer.mozilla.org/es/docs/Learn_web_development/Core/Styling_basics/Tables*/
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 3px solid rgb(255, 254, 191);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    color: blanchedalmond;
+}
+
+thead th,
+tfoot th {
+    font-family: "Rock Salt", cursive;
+}
+
+th {
+    letter-spacing: 2px;
+}
+
+td {
+    letter-spacing: 1px;
+}
+
+tbody td {
+    text-align: center;
+}
+
+tfoot th {
+    text-align: right;
+}
+
+thead,
+tfoot {
+    color: white;
+    text-shadow: 1px 1px 1px black;
+}
+
+thead th,
+tfoot th,
+tfoot td {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5));
+    border: 3px solid rgb(255, 254, 191);
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #ffc49b;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #fffed4;
+}

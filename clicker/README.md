@@ -68,3 +68,26 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+# Juego
+
+## Fuentes
+
+Para incorporar el useEffect mire https://youtu.be/TBxpAhpQqYk?si=Wrsr89uurxp1BOnk
+
+## timer
+
+Para el timer tuve la complicación que al tocar el botón de clicks, el tiempo se detenia y unicamente continuaba cuando dejaba de seleccionarlo. Para prevenir esto elegi usar:
+setTimeLeft((prev) => prev - 1) para que funcione bien aunque haya muchos renders por los clicks. Por otro lado, timer solo depende de timeLeft, porque supuestamente no se pausa aunque hagas muchos clicks. A pesar de tener en cuenta esto no me funciono.
+
+## Estado
+
+ElegirNivel: maneja el nivel seleccionado localmente para feedback visual, pero comunica el nivel elegido al padre (App) para que el juego lo use.
+
+ContadorTiempo: maneja el tiempo restante localmente, reinicia cuando cambias de nivel, y avisa cuando termina.
+
+ContadorClicks: maneja animación local y muestra el contador, pero el valor real vive en App (y así lo puedes usar para resultados y reiniciar).
+
+ResultsTabla: resalta el último resultado usando un estado local.
+
+App.jsx: concentra los estados principales y pasa props a los hijos, asegurando que toda la lógica y los datos estén sincronizados.

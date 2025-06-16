@@ -1,25 +1,23 @@
-import { useState } from "react";
-import Button from "./components/Button";
-import LevelSelector from "./components/Nivel";
-import Timer from "./components/Temporizador";
-import ClickCounter from "./components/Clicks";
-import ResultsTable from "./components/Tabla";
+import { useState, useCallback } from "react";
+import { useEffect } from "react";
+import Button from "./components/Button/Button";
+import LevelSelector from "./components/Nivel/Nivel";
+import Temporizador from "./components/Timer/Temporizador";
+import Clicks from "./components/Clicks/Clicks";
+import ResultsTable from "./components/Tabla/Tabla";
 //Todos los useState viven en App.jsx y se pasan como props a los componentes hijos
-// Importar los componentes necesarios
-// Button, Nivel, Temporizador, Clicks, Tabla
-
-// Definir los niveles del juego
-// Cada nivel tiene un nombre y un tiempo límite en segundos
+// Importar los componentes necesarios: Button, Nivel, Temporizador, Clicks, Tabla
+// Los niveles del juego
 // Defino los niveles disponibles con su nombre y tiempo asignado
 const LEVELS = [
-    { name: "Fácil", time: 10 },
-    { name: "Medio", time: 7 },
-    { name: "Difícil", time: 5 },
+    { name: "Fácil", time: 8 },
+    { name: "Medio", time: 4 },
+    { name: "Difícil", time: 1 },
 ];
 
 export default function App() {
     // Estado para controlar en qué pantalla está el usuario
-    const [screen, setScreen] = useState("level"); // "level", "game", "results"
+    const [screen, setScreen] = useState("level"); // 4 secciones: nivel, empezar, juego y resultados
 
     // Estado para guardar el nivel seleccionado por el usuario
     const [selectedLevel, setSelectedLevel] = useState(null);
@@ -37,15 +35,14 @@ export default function App() {
     const startGame = () => {
         setClicks(0); // Reseteo el contador de clicks
         setTimeLeft(selectedLevel.time); // Seteo el tiempo según el nivel
-        setScreen("game"); // Cambio la pantalla a la del juego
+        setScreen("game"); // Cambio la pantalla a la del juego -->(provisorio hasta lograr la screen de comienzo)
     };
 
     // Función que se ejecuta al finalizar el tiempo de juego
-    const finishGame = () => {
-        // Agrego el resultado actual a la lista de resultados
+    const finishGame = useCallback(() => {
         setCurrentResults((prev) => [...prev, { level: selectedLevel.name, clicks }]);
-        setScreen("results"); // Cambio la pantalla a resultados
-    };
+        setScreen("results");
+    }, [selectedLevel, clicks, setCurrentResults, setScreen]);
 
     // Función para reintentar la partida en el mismo nivel
     const retryGame = () => {
@@ -60,34 +57,77 @@ export default function App() {
         setSelectedLevel(null); // Deselecciono el nivel
     };
 
+    // HECHO CON COPILOT:
+    // useEffect para manejar el temporizador del juego
+    // Este efecto se activa cuando la pantalla es "game"
+    useEffect(() => {
+        if (screen === "game") {
+            const interval = setInterval(() => {
+                setTimeLeft((prevTime) => {
+                    // Restamos 0.01
+                    if (prevTime <= 0.01) {
+                        clearInterval(interval);
+                        finishGame();
+                        return 0;
+                    }
+                    return +(prevTime - 0.01).toFixed(2); // Redondeamos a 2 decimales
+                });
+            }, 10); // 10ms = 0.01 segundos
+
+            return () => clearInterval(interval);
+        }
+    }, [screen, finishGame]);
+
     // Renderizado condicional de componentes según pantalla
     return (
-        <div className="app">
-            {/* Pantalla de selección de nivel */}
-            {screen === "level" && (
-                <>
-                    {/* Componente para elegir el nivel */}
-                    <LevelSelector levels={LEVELS} selectedLevel={selectedLevel} onSelectLevel={setSelectedLevel} />
-                </>
-            )}
-            {/* Botón para comenzar la partida solo si hay un nivel seleccionado y pantalla de selección de nivel */}
-            {/* Pantalla de inicio con el botón "Comenzar" */}
-            {screen === "start" && selectedLevel && <Button title="Comenzar" action={startGame} />}
+        <div
+            style={{
+                height: "100vh", // Ocupa todo el alto visible
+                width: "100vw", // Ocupa todo el ancho visible
+                overflow: "hidden", // Oculta cualquier desborde
+                backgroundImage: `url(${process.env.PUBLIC_URL}/images/PixelArt.gif)`,
+                backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center",
+            }}
+        >
+            <div className="app">
+                {/* Pantalla de selección de nivel */}
+                {screen === "level" && (
+                    <>
+                        {/* Solo selector de nivel */}
+                        <LevelSelector
+                            levels={LEVELS}
+                            selectedLevel={selectedLevel}
+                            onSelectLevel={(level) => {
+                                setSelectedLevel(level);
+                                setScreen("start"); // Pasa a pantalla "start" luego de seleccionar nivel
+                            }}
+                        />
+                    </>
+                )}
+                {/* Nueva pantalla: solo botón comenzar */}
+                {screen === "start" && selectedLevel && <Button title="Comenzar" action={startGame} />}
 
-            {/* Pantalla de juego */}
-            {screen === "game" && (
-                <>
-                    {/* Componente que muestra el timer y controla el fin del juego */}
-                    <Timer timeLeft={timeLeft} setTimeLeft={setTimeLeft} onFinish={finishGame} />
-                    {/* Componente que muestra la cantidad de clicks actuales */}
-                    <ClickCounter count={clicks} />
-                    {/* Botón para sumar clicks durante la partida */}
-                    <Button title="Click" action={() => setClicks((c) => c + 1)} />
-                </>
-            )}
+                {/* Pantalla de juego - REHECHA CON COPILOT */}
+                {screen === "game" && (
+                    <>
+                        {/* Timer y clicks visibles durante la partida */}
+                        <Temporizador timeLeft={timeLeft} setTimeLeft={setTimeLeft} onFinish={finishGame} />
+                        <Clicks count={clicks} />
+                        <Button title="Click" action={() => setClicks((prev) => prev + 1)} />
+                    </>
+                )}
 
-            {/* Pantalla de resultados */}
-            {screen === "results" && <ResultsTable results={currentResults} onRetry={retryGame} onBack={goToStart} />}
+                {/* Pantalla de resultados */}
+                {screen === "results" && (
+                    <>
+                        <ResultsTable results={currentResults} />
+                        <Button title="Volver a inicio" action={goToStart} />
+                        <Button title="Reiniciar" action={retryGame} />
+                    </>
+                )}
+            </div>
         </div>
     );
 }

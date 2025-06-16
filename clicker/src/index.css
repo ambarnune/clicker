@@ -1,28 +1,35 @@
-body {
+* {
+    padding: 0;
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-        "Helvetica Neue", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-.counter {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    color: brown;
 }
 
-#counter {
-    font-size: 4rem;
-    font-weight: bold;
-    color: #61dafb;
+h1 {
+    font-size: 9rem;
+    color: #397b0a;
+    text-align: center;
+    margin-top: 20px;
 }
 
-.app {
-    display: flex;
+h2 {
+    font-size: 1.5rem;
+    color: #8f200d;
+    text-align: center;
+    margin-top: 10px;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+body {
+    background-image: url("../public/images/Pixel\ Art\ GIF\ CASCADA.gif");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Esto asegura que nunca haya scroll */
 }
