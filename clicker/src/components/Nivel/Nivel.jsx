@@ -1,10 +1,9 @@
 //LevelSelector
-import "./nivel.css";
 import Button from "../Button/Button";
 
 export default function LevelSelector({ levels, selectedLevel, onSelectLevel }) {
     return (
-        <div style={{ textAlign: "center", color: "blueviolet" }}>
+        <div style={{ textAlign: "center" }}>
             <h2>Selecciona un nivel:</h2>
             {/* asocia cada nivel a un botón. El botón queda deshabilitado si está seleccionado */}
             {levels.map((level) => (

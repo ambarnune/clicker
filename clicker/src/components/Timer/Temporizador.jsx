@@ -1,6 +1,5 @@
 // Componente Temporizador: muestra y gestiona el timer del juego en centésimas de segundo (0.01s).
 import { useEffect } from "react";
-import "./Temporizador.css";
 
 export default function Temporizador({ timeLeft, setTimeLeft, onFinish }) {
     // useEffect se ejecuta cada vez que cambia timeLeft, setTimeLeft o onFinish
@@ -21,5 +20,5 @@ export default function Temporizador({ timeLeft, setTimeLeft, onFinish }) {
     }, [timeLeft, setTimeLeft, onFinish]);
 
     // Renderiza el tiempo restante con dos decimales
-    return <div>Tiempo restante: {timeLeft.toFixed(2)}s</div>;
+    return <div className="clicks-display"> {timeLeft.toFixed(2)}s</div>;
 }

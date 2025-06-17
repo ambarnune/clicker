@@ -4,7 +4,7 @@
 
 export default function Tabla({ results, onRetry, onBack }) {
     return (
-        <div>
+        <div className="results-container">
             <h2>Resultados</h2>
             {/* Lista de resultados de cada partida */}
             <table className="table">
@@ -23,12 +23,6 @@ export default function Tabla({ results, onRetry, onBack }) {
                     ))}
                 </tbody>
             </table>
-
-            {/* Botón para reintentar la partida en el mismo nivel */}
-            <button onClick={onRetry}>Reintentar</button>
-
-            {/* Botón para volver a la pantalla de selección de nivel */}
-            <button onClick={onBack}>Volver al inicio</button>
         </div>
     );
 }
