@@ -78,7 +78,7 @@ body {
     }
 }
 
-/* === ESTILOS PARA CENTRAR BOTONES === */
+/* ESTILOS PARA CENTRAR BOTONES */
 
 /* Contenedor para centrar botones individuales */
 .button-container {
@@ -126,7 +126,7 @@ todos los botones al centro de la pantalla, al igual que el temporizador y regis
     box-shadow: none;
 }
 
-/* === ESTILOS PARA CLICKS Y TEMPORIZADOR === */
+/* ESTILOS PARA CLICKS Y TEMPORIZADOR */
 
 /* Contenedor para mostrar clicks y temporizador centrados */
 .game-info {
@@ -178,35 +178,7 @@ todos los botones al centro de la pantalla, al igual que el temporizador y regis
     margin: 40px 0;
 }
 
-/* Botón de Click especial */
-.click-button {
-    width: 200px !important;
-    height: 200px !important;
-    border-radius: 50% !important;
-    font-size: 2.5rem !important;
-    font-weight: 900 !important;
-    background: linear-gradient(45deg, #fd79a8, #fdcb6e) !important;
-    color: white !important;
-    border: none !important;
-    cursor: pointer !important;
-    transition: all 0.2s ease !important;
-    text-transform: uppercase !important;
-    letter-spacing: 2px !important;
-    box-shadow: 0 10px 30px rgba(253, 121, 168, 0.4) !important;
-    margin: 20px auto !important;
-    display: block !important;
-}
-
-.click-button:hover {
-    transform: scale(1.05) !important;
-    box-shadow: 0 15px 40px rgba(253, 121, 168, 0.6) !important;
-}
-
-.click-button:active {
-    transform: scale(0.95) !important;
-}
-
-/* === ESTILOS PARA SELECCIÓN DE NIVELES === */
+/* ESTILOS PARA SELECCIÓN DE NIVELES */
 .nivel-container {
     display: flex;
     flex-direction: column;
@@ -219,7 +191,7 @@ todos los botones al centro de la pantalla, al igual que el temporizador y regis
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
 }
 
-/* === ESTILOS PARA TABLA DE RESULTADOS === */
+/* ESTILOS PARA TABLA DE RESULTADOS */
 .results-container {
     display: flex;
     flex-direction: column;
@@ -257,7 +229,7 @@ todos los botones al centro de la pantalla, al igual que el temporizador y regis
     max-width: 300px;
 }
 
-/* === RESPONSIVE === */
+/* RESPONSIVE */
 @media (max-width: 768px) {
     .game-info {
         flex-direction: column;
